@@ -34,12 +34,9 @@ defmodule Mix.Tasks.AdventOfCode.Gen.Day do
 
     year = Keyword.get(opts, :year, now.year) |> advent_year()
     day = Keyword.get(opts, :day, now.day) |> advent_day()
+    force? = Keyword.get(opts, :force, false)
 
-    generate_skeleton(
-      year: year,
-      day: day,
-      force?: Keyword.get(opts, :force, false)
-    )
+    generate_skeleton(year, day, force?)
 
     Mix.shell().info("\nSuccessfully generated AoC skeleton for Y#{year}D#{day}.\n")
   end
@@ -47,9 +44,9 @@ defmodule Mix.Tasks.AdventOfCode.Gen.Day do
   defp day_module(day), do: "D#{String.pad_leading("#{day}", 2, "0")}"
   defp year_folder(year), do: "Y#{year}"
 
-  defp generate_skeleton(opts) do
-    year_folder = year_folder(opts[:year])
-    day_module = day_module(opts[:day])
+  defp generate_skeleton(year, day, force?) do
+    year_folder = year_folder(year)
+    day_module = day_module(day)
 
     assigns = [module_path: "#{year_folder}.#{day_module}"]
 
@@ -60,7 +57,7 @@ defmodule Mix.Tasks.AdventOfCode.Gen.Day do
     |> Enum.each(fn {type, base_dir, filename} ->
       dir = Path.join(base_dir, year_folder)
       code = render_template(type, assigns)
-      generate_code_file(dir, filename, code, opts[:force?])
+      generate_code_file(dir, filename, code, force?)
     end)
   end
 
