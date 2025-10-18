@@ -1,0 +1,20 @@
+defmodule AdventOfCode.<%= module_path %>Test do
+  use ExUnit.Case
+
+  alias AdventOfCode.<%= module_path %>, as: Day
+
+  @sample_input """
+  # example input here
+  """
+
+  @expected_part1 :nil
+  @expected_part2 :nil
+
+  test "part1/1 returns expected result" do
+    assert Day.part1(@sample_input) == @expected_part1
+  end
+
+  test "part2/1 returns expected result" do
+    assert Day.part2(@sample_input) == @expected_part2
+  end
+end

@@ -1,0 +1,19 @@
+defmodule AdventOfCode.<%= module_path %> do
+  defp handle_input(input) do
+    input
+  end
+
+  defp solve_part1(args) do
+    # Implement part 1 solution here
+    {:error, :not_implemented}
+  end
+
+  defp solve_part2(args) do
+    # Implement part 2 solution here
+    {:error, :not_implemented}
+  end
+
+  def part1(input), do: handle_input(input) |> solve_part1()
+  def part2(input), do: handle_input(input) |> solve_part2()
+  def main(input), do: handle_input(input) |> then(&{solve_part1(&1), solve_part2(&1)})
+end
